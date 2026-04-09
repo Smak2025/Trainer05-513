@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trainer05-513</string>
+    <string name="results_button_retest">Test again</string>
+    <string name="results_title">Your results</string>
+    <string name="results_text">You have %1$d correct answers from  %2$d</string>
+</resources>

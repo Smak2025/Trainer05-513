@@ -27,7 +27,7 @@ class CardData {
                 result = value1 * value2
             }
             Operation.DIV -> {
-                value2 = Random.nextInt(-10, 11)
+                value2 = Random.nextInt(1, 11) * listOf(-1, 1).random()
                 result = Random.nextInt(-10, 11)
                 value1 = result * value2
             }

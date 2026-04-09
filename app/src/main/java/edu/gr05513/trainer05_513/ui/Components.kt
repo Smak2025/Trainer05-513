@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -25,11 +27,13 @@ import androidx.compose.runtime.traceEventEnd
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import edu.gr05513.trainer05_513.R
 import edu.gr05513.trainer05_513.model.CardData
 import edu.gr05513.trainer05_513.ui.theme.Trainer05513Theme
 import kotlin.math.absoluteValue
@@ -93,7 +97,9 @@ fun ArithmeticCard(
                 onClick = {
                     onAnswer(userValue.toIntOrNull())
                 },
-                modifier = Modifier.padding(8.dp).border(1.dp, Color.Black, RoundedCornerShape(100)),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .border(1.dp, Color.Black, RoundedCornerShape(100)),
                 enabled = enabled
             ) {
                 Icon(Icons.Default.Done, null, tint = Color.Blue)
@@ -109,6 +115,50 @@ fun ArithmeticCardPreview(){
         ArithmeticCard(
             CardData(),
             Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun Results(
+    cards: List<CardData>,
+    modifier: Modifier = Modifier,
+    onClose: ()->Unit = {},
+){
+    AlertDialog(
+        onDismissRequest = onClose,
+        confirmButton = {
+            OutlinedButton(onClick = onClose) {
+                Text(stringResource(R.string.results_button_retest))
+            }
+        },
+        title = {
+            Text(stringResource(R.string.results_title))
+        },
+        text = {
+            Text(
+                stringResource(
+                    R.string.results_text,
+                    cards.count { it.isCorrect == true },
+                    cards.size
+                ))
+        },
+        modifier = modifier,
+    )
+}
+
+@Composable
+@Preview
+fun ResultsPreview(){
+    Trainer05513Theme {
+        val cards = listOf(CardData(), CardData(), CardData(), CardData(), CardData())
+        cards[0].userResult = cards[0].result
+        cards[1].userResult = cards[1].result
+        cards[2].userResult = 0
+        cards[3].userResult = 2
+        cards[4].userResult = cards[4].result
+        Results(
+            cards,
         )
     }
 }

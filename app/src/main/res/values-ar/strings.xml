@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trainer05-513</string>
+    <string name="results_button_retest">أعد إجراء الاختبار</string>
+    <string name="results_title">نتائجك</string>
+    <string name="results_text">لقد قدمت %1$d إجابة صحيحة من أصل %2$d</string>
+</resources>
